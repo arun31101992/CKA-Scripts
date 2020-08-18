@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  namespace: whizspace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      hostname: ubuntu-test1
+      hostAliases:
+      - ip: "192.168.1.40"
+        hostnames:
+        - "whiztest1.local"
+        - "whiztest2.local"
+      subdomain: prod-support
+      containers:
+      - name: ubuntu-container
+        image: ubuntu
+        command: ["/bin/sh"]
+        args: 
+        - "-c"
+        - "echo the pod is running; while true; do echo .; sleep 1; done"
+        env:
+        - name: ENVTEST1
+          value: "This is a string"
+        - name: ENVTEST2
+          value: "24232"
+        resources:
+          requests:
+            #memory: "256Mi"
+            cpu: "0.25"
+          limits:
+            memory: "128Mi"
+            #cpu: "0.5"

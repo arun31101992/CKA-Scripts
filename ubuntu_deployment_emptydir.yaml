@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  namespace: whizspace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+      - name: ubuntu-container
+        image: ubuntu
+        command: ["/bin/sh"]
+        args: 
+        - "-c"
+        - "echo the pod is running; while true; do echo .; sleep 1; done"
+        volumeMounts:
+        - name: ubuntu-hostpath-storage
+          mountPath: /tmp/data
+      volumes:
+      - name: ubuntu-hostpath-storage
+        hostPath:
+          path: /tmp/hostpathDir
+          type: DirectoryOrCreate

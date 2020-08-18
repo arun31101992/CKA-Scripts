@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: labelpod
+  labels:
+    environment: staging
+    tier: frontend
+  annotations:
+    k8slink: "https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations"
+spec:
+  containers:
+  - name: labelcontainer
+    image: nginx
+    ports:
+    - containerPort: 80

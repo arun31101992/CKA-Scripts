@@ -1,0 +1,32 @@
+apiversion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: whizspace
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      volumes:
+      - name: mongodb-persistentstorage
+        emptyDir: {}
+      imagePullSecrets:
+      - name: registrypullsecret
+      containers:
+      - image: registry.redhat.io/rhscl/mongodb-34-rhel7
+        imagePullPolicy: Always
+        name: mongodb-con
+        env:
+        - name: MONGODB_ADMIN_PASSWORD
+          value: password
+        ports:
+        - containerPort: 27017
+          name: default-port
+        volumeMounts:
+        - name: mongodb-persistentstorage
+          mountPath: /var/lib/mongodb/data

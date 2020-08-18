@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: tomcat-daemon
+  namespace: whizspace
+spec:
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: tomcatcntr
+        image: tomcat
+        ports:
+        - containerPort: 8080

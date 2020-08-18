@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-resources
+  namespace: whizspace
+spec:
+  hard:
+    requests.cpu: "0.5"
+    requests.memory: 0.5Gi
+    limits.cpu: "1"
+    limits.memory: 1Gi

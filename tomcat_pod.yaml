@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat-pod1
+  labels:
+    environment: staging
+spec:
+  containers:
+  - name: tomcat-container1
+    image: tomcat
+    ports:
+    - containerPort: 8080

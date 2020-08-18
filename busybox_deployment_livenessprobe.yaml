@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      test: liveness
+  template:
+    metadata:
+      labels:
+        test: liveness
+    spec:
+      containers:
+      - name: liveness
+        image: busybox
+        args: 
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 60; rm -rf /tmp/healthy; sleep 600
+        livenessProbe:
+          exec:
+            command:
+            - cat 
+            - /tmp/healthy
+          initialDelaySeconds: 5  
+          periodSeconds: 5

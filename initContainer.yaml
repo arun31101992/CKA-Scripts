@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: whizspace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp-container
+        image: busybox
+        command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+      initContainers:
+      - name: init-nginx-svc
+        image: busybox
+        command: ['sh', '-c', 'until nslookup nginx-svc; do echo waiting for nginx-svc; sleep 2; done;']
+      - name: init-db-svc
+        image: busybox
+        command: ['sh', '-c', 'until nslookup db-svc; do echo waiting for db-svc; sleep 2; done;']

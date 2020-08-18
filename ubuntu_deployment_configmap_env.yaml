@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  namespace: whizspace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      hostname: ubuntu-test1
+      containers:
+      - name: ubuntu-container
+        image: ubuntu
+        command: ["/bin/sh"]
+        args:
+        - "-c"
+        - "echo the pod is running; while true; do echo .; sleep 1; done"
+        env:
+        - name: ENVTEST1
+          value: "This is a String"
+        - name: CMENV1
+          valueFrom:
+            configMapKeyRef:
+              name: cm-example
+              key: example.property.1
+        - name: CMENVFile
+          valueFrom:
+            configMapKeyRef:
+              name: cm-example
+              key: example.property.file
+        - name: CMENV2
+          valueFrom:
+            configMapKeyRef:
+              name: my-config
+              key: key1

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu-deployment
+  namespace: whizspace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: two-container
+  template:
+    metadata:
+      labels:
+        app: two-container
+    spec:
+      containers:
+      - name: ubuntu-container
+        image: ubuntu
+        command: ["/bin/sh"]
+        args: 
+        - "-c"
+        - "while true; do echo inside the ubuntu container; sleep 1; done"
+      - name: busybox-container
+        image: busybox
+        command: ["/bin/sh"]
+        args:
+        - "-c"
+        - "while true; do echo inside the busybox container; sleep 1; done"

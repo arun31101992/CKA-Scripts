@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: storage-resources
+  namespace: whizspace
+spec:
+  hard:
+    requests.storage: "5Gi"
+    persistentvolumeclaims: "10"
+    my-storage-class.storageclass.storage.k8s.io/requests.storage: "2Gi"
+    my-storage-class.storageclass.storage.k8s.io/persistentvolumeclaims: "5"
+    requests.ephemeral-storage: "1Gi"
+    limits.ephemeral-storage: "2Gi"

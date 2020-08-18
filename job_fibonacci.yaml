@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: fibonacci
+spec:
+  #completions: 3
+  parallelism: 3
+  template:
+    metadata:
+      name: fibonacci
+    spec:
+      containers:
+      - name: fibonacci
+        image: ubuntu
+        command: ["bash"]
+        args: ["-c", "max=200; a=0; b=1; for((i=0;i<=max;i++)); do echo -n \"$a \"; fn=$((a+b)); a=$b; b=$fn; done"]
+      restartPolicy: Never
+  backoffLimit: 4

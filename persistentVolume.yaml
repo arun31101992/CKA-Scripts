@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testpv1
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: my-storage-class
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/vol1
+    type: DirectoryOrCreate
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testpv2
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: my-storage-class
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/vol2
+    type: DirectoryOrCreate
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testpv3
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: my-storage-class
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/vol3
+    type: DirectoryOrCreate
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testpv4
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: my-storage-class
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/vol4
+    type: DirectoryOrCreate
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: testpv5
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: my-storage-class
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /tmp/vol5
+    type: DirectoryOrCreate
